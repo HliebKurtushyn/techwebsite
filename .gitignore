@@ -137,6 +137,9 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# Custom ignores
+todo.txt
+
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Python
 app/static/problems_images/Картопляники.jpg
 app/static/problems_images/Borsch.jpg
