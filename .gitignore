@@ -138,3 +138,6 @@ dmypy.json
 cython_debug/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Python
+app/static/problems_images/Картопляники.jpg
+app/static/problems_images/Borsch.jpg
+app/static/problems_images/Маракуя.jpg
