@@ -1,21 +1,21 @@
-# Вебсайт тех. сервісу
+# Web site of technical service
 
-## Ідея проекту
->Створити сайт з реалізацією заявок на ремонт техніки онлайн. На сайті повинно бути реалізовано реєстрацію/автентифікацію клієнтів та адміністраторів. Клієнти матимуть змогу відправляти свої заявки на ремонт з описом та можливими фотографіями проблеми. Адміністратори повинні мати змогу оброблювати заявки користувачів, відправляючи їм відповіді. А якщо проблема клієнта повністю усунена - надсилати відповідний талон з інформацією про усунення проблеми та підтвердженням надання технічних послуг.
+## Project Idea
+> Create a website for submitting tech repair requests online. The site should implement registration/authentication for both customers and administrators. Customers will be able to submit repair requests with descriptions and optional photos of the issue. Administrators should be able to process user requests and send replies. If a customer's issue is fully resolved, administrators should send a corresponding ticket with information about the resolution and confirmation of the provided technical service.
 
->Клієнтам повинен бути доступний статус їх запиту: 'чекає на обробку', 'в обробці', 'завершений'. Статус усіх запитів повинен бути доступний як на веб-сайті так і в телеграм-боті, якщо клієнт хоче скористатися такою можливістю.
+> Customers must have access to the status of their request: 'pending', 'in progress', 'completed'. The status of all requests should be available both on the website and via a Telegram bot, if the customer chooses to use that option.
 
-### Побажання
->   - "Хотілося б, щоб майстри могли додавати нотатки про ремонт"
->   - "Було б класно, якби система нагадувала про важливі події"
->   - "Клієнти часто питають про гарантію - може, зберігати документи?"
->   - "Наші постачальники теж могли б мати доступ до системи"
+### Wishes
+> - "It would be nice if technicians could add repair notes."
+> - "It would be great if the system reminded about important events."
+> - "Customers often ask about warranties — maybe store documents?"
+> - "Our suppliers could also have access to the system."
 
-## Що буде в проекті
+## What the project will include
 
-### Основні можливості
-- Клієнти заходять на сайт, реєструються та подають заявки з фотографіями поломок
-- Адміністратори (майстри) отримують заявки, обробляють їх та надають відповіді
-- Статуси оновлюються автоматично, клієнти завжди знають, що відбувається
-- Telegram бот надсилає сповіщення про важливі події
-- Звіти допомагають аналізувати роботу компанії
+### Main features
+- Customers visit the site, register, and submit requests with photos of defects
+- Administrators (technicians) receive requests, process them, and provide responses
+- Statuses update automatically so customers always know what's happening
+- A Telegram bot sends notifications about important events
+- Reports help analyze the company's performance
