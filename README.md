@@ -1,9 +1,10 @@
-# Вебсайт тех. сервісу (development branch)
+# Web site of technical service (development branch)
 
-Це гілка розробки проекту. Тут буде йти розробка, публікуватися зміни, тощо. Також будуть створюватись інші підгілки як features, де будуть тестуватись нові можливості.
+> Note: This is the `dev` branch. Code here may be unstable.
+> For stable documentation, see the `main` branch.
 
-Код в більшостьі вимпадків __НЕ__ буде працювати.
+The code in most cases will __NOT__ work.
 
-Документація пізніше буде перероблена, щоб все ж включити інструкції для dev версії.
+The documentation will be reworked later to still include instructions for the dev version.
 
-За планом, описом, тощо проекту, звертатися до main гілки проекту
+For the project plan, description, etc., refer to the main branch of the project
