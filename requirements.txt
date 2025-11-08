@@ -1,0 +1,10 @@
+fastapi
+sqlalchemy
+dotenv
+bcrypt
+aiomysql
+jwt
+uvicorn
+asyncpg
+jinja2
+python-multipart
