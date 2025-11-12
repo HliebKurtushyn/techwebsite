@@ -14,6 +14,7 @@ import bcrypt
 import jwt
 
 from app.api.v1.auth import router as auth_router
+from app.api.v1.home import router as home_router
 from app.db.session import Base, async_session, engine
 from app.models.problem import Problem
 from app.models.user import User
@@ -28,7 +29,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-app.include_router(auth_router)
+app.include_router(auth_router, prefix="/auth")
+app.include_router(home_router)
 
 
 templates = Jinja2Templates(directory="app/templates")
