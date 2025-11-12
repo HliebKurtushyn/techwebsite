@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if flash_msg %}
+        <div>
+            <span>{{ flash_msg }}</span>
+        </div>
+    {% endif %}
+
+    <h1>Welcome on the TechService website!</h1>
+    <p>This is the home page.</p>
+
+    {% if user %}
+        <form action="/auth/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="/auth/login">Login</a>
+        <a href="/auth/register">Sign Up</a>
+    {% endif %}
+{% endblock %}
