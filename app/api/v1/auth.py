@@ -14,6 +14,7 @@ import jwt
 
 from app.db.session import get_session
 from app.models.user import User
+from app.api.v1.dependencies import get_current_user
 
 load_dotenv()
 
@@ -24,60 +25,56 @@ router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-
-@router.get("/")
-async def home(request: Request):
-    return {"message": "Вітаємо на нашому сайті!)"}
+def clear_flash_cookie(response: Response):
+    response.delete_cookie("flash_msg")
 
 
 @router.get("/register")
 async def register_get(request: Request):
-    return templates.TemplateResponse("register.html", {"request": request})
+    flash_msg = request.cookies.get("flash_msg")
+    response = templates.TemplateResponse(
+        "auth/register.html",
+        {"request": request, "flash_msg": flash_msg},
+    )
+    clear_flash_cookie(response)
+    return response
 
 
 @router.post("/register")
 async def register_post(
-    request: Request,
     username: str = Form(...),
     password: str = Form(...),
     email: str = Form(...),
     session: AsyncSession = Depends(get_session),
 ):
+    result = await session.execute(select(User).filter(User.username == username))
+    if result.scalars().first():
+        redirect = RedirectResponse(url="/auth/register", status_code=302)
+        redirect.set_cookie(key="flash_msg", value="Username already exists.")
+        return redirect
+
     new_user = User(username=username, email=email)
     new_user.set_password(raw_password=password)
     session.add(new_user)
     await session.commit()
-    await session.refresh(new_user)
-    return templates.TemplateResponse(
-        "register.html",
-        {"request": request, "message": "Ви успішно створили акаунт!"},
-    )
 
-
-def get_current_user(access_token: str = Cookie(None)):
-    if not access_token:
-        raise HTTPException(status_code=401, detail="Неавторизовано")
-    try:
-        payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id = payload.get("user_id")
-        role = payload.get("role")
-        if user_id is None or role is None:
-            raise HTTPException(status_code=401)
-        return user_id, role
-    except jwt.PyJWTError:
-        raise HTTPException(status_code=401, detail="Недійсний токен")
+    redirect = RedirectResponse(url="/auth/login", status_code=302)
+    redirect.set_cookie(key="flash_msg", value="Successfully created an account!")
+    return redirect
 
 
 @router.get("/login")
-async def login_get(request: Request, error: str = None):
-    return templates.TemplateResponse(
-        "login.html", {"request": request, "error": error}
+async def login_get(request: Request):
+    flash_msg = request.cookies.get("flash_msg")
+    response = templates.TemplateResponse(
+        "auth/login.html", {"request": request, "flash_msg": flash_msg}
     )
+    clear_flash_cookie(response)
+    return response
 
 
 @router.post("/login")
 async def login_post(
-    response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
     session: AsyncSession = Depends(get_session),
 ):
@@ -85,10 +82,9 @@ async def login_post(
     user = result.scalars().first()
 
     if not user or not bcrypt.checkpw(form_data.password.encode(), user.password.encode()):
-        return RedirectResponse(
-            url="/login/?error=Пароль або логін невірний, спробуйте ще раз",
-            status_code=302,
-        )
+        redirect = RedirectResponse(url="/auth/login", status_code=302)
+        redirect.set_cookie(key="flash_msg", value="Incorrect username or password.")
+        return redirect
 
     token_data = {
         "user_id": user.id,
@@ -97,18 +93,21 @@ async def login_post(
     }
     token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
 
-    response = RedirectResponse(url="/", status_code=302)
-    response.set_cookie(
+    redirect = RedirectResponse(url="/", status_code=302)
+    redirect.set_cookie(key="flash_msg", value="Successfully logged in")
+    redirect.set_cookie(
         key="access_token",
         value=token,
         httponly=True,
         max_age=60 * 60 * 24 * 3,
         samesite="lax",
     )
-    return response
+    return redirect
 
 
 @router.post("/logout")
-def logout(response: Response):
-    response.delete_cookie("access_token")
-    return {"message": "Ви вийшли з системи"}
+async def logout():
+    redirect = RedirectResponse(url="/", status_code=302)
+    redirect.set_cookie(key="flash_msg", value="Successfully logged out")
+    redirect.delete_cookie("access_token")
+    return redirect
