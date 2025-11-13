@@ -12,36 +12,33 @@ from sqlalchemy.future import select
 import bcrypt
 import jwt
 
+from app.api.v1.__init__ import SECRET_KEY
 from app.db.session import get_session
 from app.models.user import User
-from app.api.v1.dependencies import get_current_user
+from app.api.v1.dependencies import *
 
 load_dotenv()
 
 ALGORITHM = "HS256"
-SECRET_KEY = os.getenv("SECRET_KEY")
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-def clear_flash_cookie(response: Response):
-    response.delete_cookie("flash_msg")
 
-
-@router.get("/register")
-async def register_get(request: Request):
+@router.get("/signup")
+async def signup(request: Request):
     flash_msg = request.cookies.get("flash_msg")
     response = templates.TemplateResponse(
-        "auth/register.html",
+        "auth/signup.html",
         {"request": request, "flash_msg": flash_msg},
     )
     clear_flash_cookie(response)
     return response
 
 
-@router.post("/register")
-async def register_post(
+@router.post("/signup")
+async def signup_post(
     username: str = Form(...),
     password: str = Form(...),
     email: str = Form(...),
@@ -49,7 +46,7 @@ async def register_post(
 ):
     result = await session.execute(select(User).filter(User.username == username))
     if result.scalars().first():
-        redirect = RedirectResponse(url="/auth/register", status_code=302)
+        redirect = RedirectResponse(url="/auth/signup", status_code=302)
         redirect.set_cookie(key="flash_msg", value="Username already exists.")
         return redirect
 
@@ -64,7 +61,7 @@ async def register_post(
 
 
 @router.get("/login")
-async def login_get(request: Request):
+async def login(request: Request):
     flash_msg = request.cookies.get("flash_msg")
     response = templates.TemplateResponse(
         "auth/login.html", {"request": request, "flash_msg": flash_msg}
