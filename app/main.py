@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 import bcrypt
 import jwt
@@ -20,6 +21,7 @@ from app.models.problem import Problem
 from app.models.user import User
 from app.models.service_record import ServiceRecord
 from app.models.admin_response import AdminResponse
+from app.core.handlers.exceptions import not_found_handler
 
 
 load_dotenv()
@@ -28,6 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 app = FastAPI()
 
+app.add_exception_handler(StarletteHTTPException, not_found_handler)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(auth_router, prefix="/auth")
 app.include_router(home_router)
