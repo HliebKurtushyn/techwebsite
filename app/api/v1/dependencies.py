@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from fastapi import Cookie, HTTPException
+from fastapi import Cookie, HTTPException, Response
 import jwt
 import os
 
@@ -8,6 +8,7 @@ load_dotenv()
 ALGORITHM = "HS256"
 SECRET_KEY = os.getenv("SECRET_KEY")
 
+__all__ = ["get_current_user", "clear_flash_cookie"]
 
 def get_current_user(access_token: str = Cookie(None)):
     if not access_token:
@@ -21,4 +22,7 @@ def get_current_user(access_token: str = Cookie(None)):
         return user_id, role
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
-    
+
+
+def clear_flash_cookie(response: Response):
+    response.delete_cookie("flash_msg")
