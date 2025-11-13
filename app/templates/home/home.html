@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block head %}
+    <title>TechService - Home</title>
+{% endblock %}
+
 {% block content %}
     {% if flash_msg %}
         <div>
@@ -11,11 +15,11 @@
     <p>This is the home page.</p>
 
     {% if user %}
-        <form action="/auth/logout" method="post">
+        <form action="{{ request.url_for('logout') }}" method="post">
             <button type="submit">Logout</button>
         </form>
     {% else %}
-        <a href="/auth/login">Login</a>
-        <a href="/auth/register">Sign Up</a>
+        <a href="{{ request.url_for('login') }}">Login</a>
+        <a href="{{ request.url_for('signup') }}">Sign Up</a>
     {% endif %}
 {% endblock %}
