@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Sign up</title>
+{% endblock %}
+
+{% block content %}
+    {% if flash_msg %}
+        <span>{{ flash_msg }}</span>
+    {% endif %}
+
+    <form method="post" id="signUpForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="password" name="password_confirm" id="confirmPassword" placeholder="Confirm password" required>
+        <button type="submit">Sign up</button>
+    </form>
+
+    <p>Already got an account? <a href="{{ request.url_for('login') }}">Log in</a></p>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', path='js/signup.js') }}"></script>  
+{% endblock %}
