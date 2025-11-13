@@ -4,13 +4,14 @@ from dotenv import load_dotenv
 from fastapi import APIRouter, Request, Response, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer
-from app.api.v1.dependencies import get_current_user
+
+from app.api.v1.dependencies import *
+from app.api.v1.__init__ import SECRET_KEY
 
 
 load_dotenv()
 
 ALGORITHM = "HS256"
-SECRET_KEY = os.getenv("SECRET_KEY")
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -29,4 +30,3 @@ async def home(request: Request, user: tuple | None = Depends(get_current_user, 
         template_response.delete_cookie("flash_msg")
     
     return template_response
-
