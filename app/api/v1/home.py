@@ -27,6 +27,6 @@ async def home(request: Request, user: tuple | None = Depends(get_current_user, 
         {"request": request, "flash_msg": flash_msg, "user": user}
     )
     if flash_msg:
-        template_response.delete_cookie("flash_msg")
+        clear_flash_cookie(template_response)
     
     return template_response
