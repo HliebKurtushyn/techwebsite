@@ -12,14 +12,13 @@ from sqlalchemy.future import select
 import bcrypt
 import jwt
 
-from app.api.v1.__init__ import SECRET_KEY
 from app.db.session import get_session
 from app.models.user import User
-from app.api.v1.dependencies import *
+from app.core.config import ALGORITHM, SECRET_KEY
+from app.core.dependencies import *
+
 
 load_dotenv()
-
-ALGORITHM = "HS256"
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
