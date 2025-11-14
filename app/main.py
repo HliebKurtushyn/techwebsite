@@ -14,13 +14,9 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 import bcrypt
 import jwt
 
-from app.api.v1.auth import router as auth_router
-from app.api.v1.home import router as home_router
+from app.api.v1_endpoints import api_v1_router
 from app.db.session import Base, async_session, engine
-from app.models.problem import Problem
-from app.models.user import User
-from app.models.service_record import ServiceRecord
-from app.models.admin_response import AdminResponse
+from app.models.__init__ import *
 from app.core.handlers.exceptions import not_found_handler, access_denied_handler
 
 load_dotenv()
@@ -34,8 +30,7 @@ app.add_exception_handler(StarletteHTTPException, access_denied_handler)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
-app.include_router(auth_router, prefix="/auth")
-app.include_router(home_router)
+app.include_router(api_v1_router)
 
 templates = Jinja2Templates(directory="app/templates")
 
