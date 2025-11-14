@@ -2,8 +2,6 @@ from fastapi import Request
 from fastapi.templating import Jinja2Templates
 from starlette.status import HTTP_404_NOT_FOUND, HTTP_403_FORBIDDEN
 
-from app.api.v1.auth import login
-
 templates = Jinja2Templates(directory="app/templates")
 
 async def not_found_handler(request: Request, exc):
