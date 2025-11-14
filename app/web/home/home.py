@@ -5,13 +5,11 @@ from fastapi import APIRouter, Request, Response, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer
 
-from app.api.v1.dependencies import *
-from app.api.v1.__init__ import SECRET_KEY
+from app.core.dependencies import *
+from app.core.config import ALGORITHM
 
 
 load_dotenv()
-
-ALGORITHM = "HS256"
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")

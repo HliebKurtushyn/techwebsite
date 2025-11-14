@@ -1,25 +1,20 @@
-import os
-
-from dotenv import load_dotenv
-from fastapi import APIRouter, Request, Response, Depends, Form, File
+from fastapi import APIRouter, Request, Response, Depends, Form, File, UploadFile
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer
+
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from app.api.v1.dependencies import *
+from app.core.dependencies import clear_flash_cookie, get_current_user
 from app.db.session import get_session
-from app.models.__init__ import *
-from app.api.v1.__init__ import SECRET_KEY
+from app.models.problem import Problem
+from app.models.user import User
 
-
-load_dotenv()
-
-ALGORITHM = "HS256"
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+UPLOAD_DIR = "static/requests_images"
 
 
 @router.get('/new')
