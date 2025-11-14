@@ -1,12 +1,6 @@
-from dotenv import load_dotenv
-from fastapi import Cookie, HTTPException, Response
 import jwt
-import os
-
-load_dotenv()
-
-ALGORITHM = "HS256"
-SECRET_KEY = os.getenv("SECRET_KEY")
+from fastapi import Cookie, HTTPException, Response
+from app.core.config import SECRET_KEY, ALGORITHM
 
 __all__ = ["get_current_user", "clear_flash_cookie"]
 
