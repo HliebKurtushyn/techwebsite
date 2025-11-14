@@ -21,8 +21,7 @@ from app.models.problem import Problem
 from app.models.user import User
 from app.models.service_record import ServiceRecord
 from app.models.admin_response import AdminResponse
-from app.core.handlers.exceptions import not_found_handler
-
+from app.core.handlers.exceptions import not_found_handler, access_denied_handler
 
 load_dotenv()
 
@@ -31,12 +30,15 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 app = FastAPI()
 
 app.add_exception_handler(StarletteHTTPException, not_found_handler)
+app.add_exception_handler(StarletteHTTPException, access_denied_handler)
+
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
 app.include_router(auth_router, prefix="/auth")
 app.include_router(home_router)
 
-
 templates = Jinja2Templates(directory="app/templates")
+
 
 async def init_db():
     async with engine.begin() as conn:
