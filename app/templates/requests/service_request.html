@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Request</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Service Request Form</h1>
+    
+    {% if flash_msg %}
+        <h3>{{flash_msg}}</h3>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="description" placeholder="Description">
+        <input type="file" name="img">
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}
