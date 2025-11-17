@@ -83,6 +83,7 @@ async def login_post(
         return redirect
 
     token_data = {
+        "username": user.username,
         "user_id": user.id,
         "role": "admin" if user.is_admin else "user",
         "exp": datetime.utcnow() + timedelta(days=3),
