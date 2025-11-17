@@ -1,12 +1,12 @@
-    {% extends 'base.html' %}
-    
-    {% block head %}
-        <title>403: Access denied</title>
-    {% endblock %}
+{% extends 'base.html' %}
 
-    {% block content %}
-        <h1>403</h1>
-        <p>Sorry, you don`t have permission to view this page. You may need to sign in or contact the administrator.</p>
-        <p>Please, try logging in at the  <a href="{{ request.url_for('login') }}">Log in page</a>, or return to the <a href="/">homepage</a>.</p>
-        <p>If you think this is an error, contact support.</p>
-    {% endblock %}
+{% block head %}
+    <title>403: Access denied</title>
+{% endblock %}
+
+{% block content %}
+    <h1>403</h1>
+    <p>Sorry, you don`t have permission to view this page. You may need to sign in or contact the administrator.</p>
+    <p>Please, try logging in at the  <a href="{{ request.url_for('login') }}">Log in page</a>, or return to the <a href="/">homepage</a>.</p>
+    <p>If you think this is an error, contact support.</p>
+{% endblock %}
