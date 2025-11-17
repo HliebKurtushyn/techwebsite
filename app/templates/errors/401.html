@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>401: Unauthorized</title>
+{% endblock %}
+
+{% block content %}
+    <h1>401</h1>
+    <h3>Access Denied</h3>
+    <p>You do not have the necessary credentials (e.g., a valid token or session) to access this resource.</p>
+    <p>Please, try logging in at the  <a href="{{ request.url_for('login') }}">Log in page</a>, or return to the <a href="/">homepage</a>.</p>
+    <p>If you think this is an error, contact support.</p>
+{% endblock %}
