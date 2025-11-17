@@ -16,7 +16,7 @@ import jwt
 from app.web.router import router
 from app.db.session import Base, async_session, engine
 from app.models.__init__ import *
-from app.core.handlers.exceptions import not_found_handler, access_denied_handler
+from app.core.handlers.exceptions import not_found_handler, access_denied_handler, unauthorized_handler
 from app.core.config import SECRET_KEY
 
 
@@ -24,6 +24,7 @@ app = FastAPI()
 
 app.add_exception_handler(StarletteHTTPException, not_found_handler)
 app.add_exception_handler(StarletteHTTPException, access_denied_handler)
+app.add_exception_handler(StarletteHTTPException, unauthorized_handler)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
