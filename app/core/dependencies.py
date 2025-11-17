@@ -9,11 +9,12 @@ def get_current_user(access_token: str = Cookie(None)):
         return None
     try:
         payload = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("username")
         user_id = payload.get("user_id")
         role = payload.get("role")
         if user_id is None or role is None:
             return None
-        return user_id, role
+        return username, user_id, role
     except jwt.PyJWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
