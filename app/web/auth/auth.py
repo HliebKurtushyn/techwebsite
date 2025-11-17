@@ -91,7 +91,7 @@ async def login_post(
     token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
 
     redirect = RedirectResponse(url="/", status_code=302)
-    redirect.set_cookie(key="flash_msg", value="Successfully logged in")
+    redirect.set_cookie(key="flash_msg", value="Successfully logged in as " + user.username)
     redirect.set_cookie(
         key="access_token",
         value=token,
