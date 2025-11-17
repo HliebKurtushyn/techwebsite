@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - {{ problem.title }}</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+
+    <form method="post">
+        <h4>{{problem.title}}</h4>
+        <input type="hidden" name="id" value="{{problem.id}}">
+        <p>{{problem.description}}</p>
+
+        {%if problem.image_url%}
+            <img src="{{ url_for('static', path=problem.image_url) }}" alt="Problem Image" style="max-width: 100px; max-height: 150px;">
+        {%endif%}
+
+        <button type="submit">Take to work</button>
+    </form>
+{% endblock %}
