@@ -139,7 +139,7 @@ cython_debug/
 
 # Custom ignores
 todo.txt
-app/static/requests_images/
+app/static/problems_images/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Python
 app/static/problems_images/Картопляники.jpg
