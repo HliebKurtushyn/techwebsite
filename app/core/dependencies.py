@@ -21,13 +21,16 @@ def get_current_user(access_token: str = Cookie(None)):
         raise HTTPException(status_code=401, detail="Invalid token")
 
 
-async def admin_required(user: User = Depends(get_current_user)):
-    if user is None or user[2] != "admin":
-        raise HTTPException(status_code=403, detail="Access denied. Admins only.")
-    return user
+async def admin_required(user: tuple | None = Depends(get_current_user)):
+    if user:
+        if user[2] != "admin":
+            raise HTTPException(status_code=403, detail="Access denied. Admins only.")
+        return user
+    else:
+        raise HTTPException(status_code=401, detail="Authentication required.")
 
 
-async def login_required(user: User = Depends(get_current_user)):
+async def login_required(user: tuple | None = Depends(get_current_user)):
     if user is None:
         raise HTTPException(status_code=401, detail="Authentication required.")
     return user
