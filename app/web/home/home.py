@@ -1,7 +1,5 @@
-import os
-
 from dotenv import load_dotenv
-from fastapi import APIRouter, Request, Response, Depends
+from fastapi import APIRouter, Request, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2PasswordBearer
 
