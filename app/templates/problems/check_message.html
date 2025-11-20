@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Check message</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+    <h2>Problem: {{problem.title}}</h2>
+        <p>{{problem.description}}</p>
+        {%if problem.image_url%}
+            <img src="static/{{problem.image_url}}">
+        {%endif%}
+    <small>{{problem.date_created}}</small>
+    <small>Status: {{problem.status}}</small>
+
+    <h2>Answer:</h2>
+    <p>{{answer.message}}</p>
+    <small>{{answer.date_responded}}</small>
+{% endblock %}

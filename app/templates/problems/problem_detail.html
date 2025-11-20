@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}TechService - {{ problem.title }}{% endblock %}
+
+{% block content %}
+<main class="container">
+    <header class="page-header">
+        <h1>Request #{{ problem.id }}: {{ problem.title }}</h1>
+    <a href="/problems" class="btn secondary-btn">Back to list</a>
+    </header>
+
+    <section class="problem-detail">
+        <p><strong>Status:</strong> {{ problem.status }}</p>
+        <hr>
+        <p><strong>Description:</strong></p>
+        <p>{{ problem.description }}</p>
+        <p><strong>Date created:</strong> {{ problem.date_created.strftime('%Y-%m-%d %H:%M') }}</p>
+
+        {% if problem.user %}
+            <p><strong>Created by user:</strong> {{ problem.user.username }}</p>
+        {% endif %}
+
+        {% if problem.admin %}
+            <p><strong>Administrator:</strong> {{ problem.admin.username }}</p>
+        {% else %}
+            <p><strong>Administrator:</strong> Not assigned</p>
+        {% endif %}
+
+        {% if problem.image_url %}
+            <div class="problem-image">
+                <img src="{{ url_for('static', path=problem.image_url) }}" alt="Problem Image" style="max-width:300px;">
+            </div>
+        {% endif %}
+
+    </section>
+</main>
+{% endblock %}

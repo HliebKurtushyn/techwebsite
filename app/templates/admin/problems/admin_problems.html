@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Admin problems</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+
+    <h2>My not closed requests:</h2>
+    {%for problem in problems%}
+        <h4>{{problem.title}}</h4>
+        <p>{{problem.description}}</p>
+        <small>{{problem.date_created}}</small>
+
+        <form action="{{ request.url_for('add_answer')}}">
+        <button type="submit">Add answer</button>
+        <input type="hidden" name="problem_id" value="{{problem.id}}">
+        </form>
+
+        <form action="{{ request.url_for('service_complete_get')}}">
+            <button type="submit">Close problem</button>
+            <input type="hidden" name="problem_id" value="{{problem.id}}">
+        </form>
+
+    {%endfor%}
+{% endblock %}

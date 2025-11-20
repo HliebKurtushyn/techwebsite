@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Check message</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+
+    <h2>Problem: {{problem.title}}</h2>
+        <p>{{problem.description}}</p>
+        {%if problem.image_url%}
+            <img src="static/problems_images/{{problem.image_url}}">
+        {%endif%}
+    <small>{{problem.date_created}}</small>
+    <small>Status: {{problem.status}}</small>
+
+    <h4>Опис виконаної роботи:</h4>
+    <pre>{{service_record.word_done}}</pre>
+    <h4>Використані матеріали:</h4>
+    <pre>{{service_record.parts_used}}</pre>
+    <h2>Інформаційний талон:</h2>
+    <pre>{{service_record.warranty_info}}</pre>
+{% endblock %}

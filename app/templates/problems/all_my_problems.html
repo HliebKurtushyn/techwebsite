@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - All my problems</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+
+    {%for i in problems%}
+        <h3>{{i.title}}</h3>
+        <p>{{i.description}}</p>
+        <small>{{i.date_created}}</small>
+        <p>Статус: {{i.status}}</p>
+
+        {%if i.status == 'Завершено'%}
+            <p><a href="/problems/service_record_review?id={{i.id}}">Service ticket</a></p>
+        {%elif i.status == 'Є відповідь'%}
+            <p><a href="/problems/check_message?id={{i.id}}">Check message</a></p>
+        {%endif%}
+    {%endfor%}
+
+{% endblock %}

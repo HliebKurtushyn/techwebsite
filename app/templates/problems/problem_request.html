@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}TechService - New Problem Request{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <div class="form-card wide-form-card">
+            <h1>Service Problem Request Form</h1>
+            <p class="form-description">Please fill out the form below to submit a new technical problem or service request.</p>
+
+            {% if flash_msg %}
+                <div class="flash-message success-message">
+                    <span>{{ flash_msg }}</span>
+                </div>
+            {% endif %}
+
+            <form method="post" action="/problems/new" enctype="multipart/form-data" class="main-form">
+                
+                <label for="title">Problem Title</label>
+                <input type="text" id="title" name="title" placeholder="Short and clear title (e.g., Printer Error Code 404)" required>
+                
+                <label for="description">Detailed Description</label>
+                <textarea id="description" name="description" placeholder="Describe the problem, steps to reproduce it, and any error messages." rows="6" required></textarea>
+                
+                <div class="file-upload-group">
+                    <label for="img">Attach Screenshot or Photo (Optional)</label>
+                    <input type="file" id="img" name="img" accept="image/*">
+                    <p class="input-hint">Accepted formats: JPG, PNG. Max file size: 5MB.</p>
+                </div>
+
+                <button type="submit" class="btn large-btn">Submit Problem Request</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
