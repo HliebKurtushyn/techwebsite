@@ -22,9 +22,9 @@ from app.core.config import SECRET_KEY
 
 app = FastAPI()
 
-app.add_exception_handler(StarletteHTTPException, not_found_handler)
-app.add_exception_handler(StarletteHTTPException, access_denied_handler)
-app.add_exception_handler(StarletteHTTPException, unauthorized_handler)
+app.add_exception_handler(404, not_found_handler)
+app.add_exception_handler(403, access_denied_handler)
+app.add_exception_handler(401, unauthorized_handler)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
