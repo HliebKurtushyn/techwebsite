@@ -1,0 +1,43 @@
+/* --- Authentication Form Styles (Login/Signup) --- */
+
+.form-card {
+    max-width: 400px; /* Обмеження ширини для кращої читабельності форм */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    border-top: 5px solid var(--primary-color); /* Акцентна лінія */
+}
+
+.form-card h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.auth-form {
+    margin-top: 20px;
+}
+
+/* Перевизначення для flash message, що вказує на помилку */
+.error-message {
+    color: #A94442; /* Dark red text */
+    background-color: #F2DEDE; /* Light red background */
+    border-color: #EBCCD1; /* Slightly darker light red border */
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+    color: var(--light-text-color);
+}
+
+.form-footer a {
+    font-weight: 600;
+}

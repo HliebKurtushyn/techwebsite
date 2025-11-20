@@ -1,0 +1,48 @@
+/* --- Problem Request Form Specific Styles --- */
+
+/* Ширша форма для вмісту (наприклад, для Problem Request) */
+.form-card.wide-form-card {
+    max-width: 600px; 
+}
+
+.form-description {
+    text-align: center;
+    color: var(--light-text-color);
+    margin-bottom: 25px;
+}
+
+/* Стилізація текстової області */
+textarea {
+    resize: vertical; /* Дозволити змінювати розмір лише по вертикалі */
+}
+
+/* Стилізація завантаження файлу */
+.file-upload-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px dashed var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+}
+
+.input-hint {
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    margin-top: 5px;
+}
+
+/* Стилізація кнопки відправки, щоб була ширша */
+.large-btn {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1em;
+    margin-top: 15px;
+}
+
+/* Виправлення стилю для input type="file", оскільки його важко стилізувати напряму */
+input[type="file"] {
+    border: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    background-color: transparent;
+}

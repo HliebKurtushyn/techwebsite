@@ -1,0 +1,180 @@
+/* --- Problems List Page Styles --- */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    margin: 0;
+    border-bottom: none;
+}
+
+.header-btn {
+    padding: 8px 15px;
+    font-size: 0.95em;
+}
+
+.welcome-message {
+    color: var(--light-text-color);
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.problems-list {
+    display: grid;
+    gap: 30px;
+    /* Створюємо адаптивну сітку, якщо дозволяє вміст */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.problem-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.problem-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.problem-title {
+    font-size: 1.3em;
+    color: var(--text-color);
+    margin: 0;
+    flex-grow: 1;
+    line-height: 1.3;
+}
+
+.card-separator {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 15px 0;
+}
+
+/* --- Status Tags --- */
+
+.status-tag {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+/* Приклади кольорів для різних статусів */
+.status-new {
+    background-color: #f7d1d1; /* Light Red/Pink */
+    color: #a72323;
+}
+
+.status-in-progress, .status-assigned {
+    background-color: #fff9c4; /* Light Yellow */
+    color: #8b6e00;
+}
+
+.status-resolved, .status-closed {
+    background-color: #c8e6c9; /* Light Green (Success) */
+    color: #2e7d32;
+}
+
+/* --- Details Table --- */
+
+.problem-description h4 {
+    color: var(--primary-color);
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    border-bottom: none;
+}
+
+.problem-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.problem-details-table th, .problem-details-table td {
+    padding: 8px 0;
+    text-align: left;
+}
+
+.problem-details-table th {
+    font-weight: 600;
+    width: 35%; /* Фіксована ширина для міток */
+    color: var(--light-text-color);
+    padding-right: 10px;
+}
+
+.problem-details-table tr:not(:last-child) {
+    border-bottom: 1px dotted #EEEEEE;
+}
+
+.admin-assigned {
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.admin-unassigned {
+    color: #888888;
+    font-style: italic;
+}
+
+/* --- Image Preview --- */
+
+.problem-image-preview {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.attached-image-thumbnail {
+    width: 150px;
+    height: 200px;
+    object-fit: cover; 
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+}
+
+/* --- Card Actions and Empty State --- */
+
+.card-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.view-details-btn {
+    background-color: var(--secondary-color);
+    padding: 8px 12px;
+}
+
+.view-details-btn:hover {
+    background-color: #3C7BB9;
+}
+
+.no-problems {
+    text-align: center;
+    padding: 50px 20px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    margin-top: 40px;
+}
