@@ -1,25 +1,41 @@
 {% extends 'base.html' %}
 
+{% block title %}TechService - Home{% endblock %}
+
 {% block head %}
-    <title>TechService - Home</title>
-{% endblock %}
+    {% endblock %}
 
 {% block content %}
-    {% if flash_msg %}
-        <div>
-            <span>{{ flash_msg }}</span>
-        </div>
-    {% endif %}
+    <main class="container text-center">
+        {% if flash_msg %}
+            <div class="flash-message success-message">
+                <span>{{ flash_msg }}</span>
+            </div>
+        {% endif %}
 
-    <h1>Welcome on the TechService website!</h1>
-    <p>This is the home page.</p>
+        <h1>Welcome to the TechService website!</h1>
+        <p>This is the main page for managing and requesting technical problems.</p>
 
-    {% if user %}
-        <form action="{{ request.url_for('logout') }}" method="post">
-            <button type="submit">Logout</button>
-        </form>
-    {% else %}
-        <a href="{{ request.url_for('login') }}">Login</a>
-        <a href="{{ request.url_for('signup') }}">Sign Up</a>
-    {% endif %}
+        <section class="auth-section">
+            {% if user %}
+                <h3>Hello, {{ user[0] }}!</h3>
+                <p>Ready to solve some problems?</p>
+                <form action="{{ request.url_for('logout') }}" method="post">
+                    <button type="submit" class="btn logout-btn">Logout</button>
+                </form>
+            {% else %}
+                <p>Join us to report or view technical issues.</p>
+                <div class="auth-links">
+                    <a href="{{ request.url_for('login') }}" class="btn">Login</a>
+                    <a href="{{ request.url_for('signup') }}" class="btn secondary-btn">Sign Up</a>
+                </div>
+            {% endif %}
+        </section>
+
+        <section class="quick-access">
+            <h2>Quick Access</h2>
+            <p>Go directly to the main problems list:</p>
+            <a href="{{ request.url_for('problems') }}" class="btn primary-color-bg">View All Problems</a>
+        </section>
+    </main>
 {% endblock %}

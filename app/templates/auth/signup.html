@@ -1,25 +1,48 @@
 {% extends 'base.html' %}
 
-{% block head %}
-    <title>TechService - Sign up</title>
-{% endblock %}
+{% block title %}TechService - Sign up{% endblock %}
+
+{% block head %}<link rel="stylesheet" href="{{ url_for('static', path='css/auth/auth.css') }}">{% endblock %}
 
 {% block content %}
-    {% if flash_msg %}
-        <span>{{ flash_msg }}</span>
-    {% endif %}
+    <main class="container">
+        <div class="form-card">
+            <h2>Create Your TechService Account</h2>
 
-    <form method="post" id="signUpForm">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <input type="password" name="password_confirm" id="confirmPassword" placeholder="Confirm password" required>
-        <button type="submit">Sign up</button>
-    </form>
+            {% if flash_msg %}
+                <div class="flash-message error-message">
+                    <span>{{ flash_msg }}</span>
+                </div>
+            {% endif %}
 
-    <p>Already got an account? <a href="{{ request.url_for('login') }}">Log in</a></p>
+            <form method="post" class="auth-form" id="signUpForm">
+                
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter password (min 6 characters)" required>
+                
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="password_confirm" id="confirmPassword" placeholder="Repeat password" required>
+                
+                <div id="password-match-error" class="error-message hidden">
+                    Passwords do not match.
+                </div>
+                
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+
+            <p class="form-footer">
+                Already got an account? <a href="{{ request.url_for('login') }}">Log in here</a>
+            </p>
+        </div>
+    </main>
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', path='js/signup.js') }}"></script>  
+    <script src="{{ url_for('static', path='js/signup.js') }}"></script> 
 {% endblock %}
