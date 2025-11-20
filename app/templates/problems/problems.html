@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}TechService - All Problems{% endblock %}
+
+{% block content %}
+    <main class="container">
+        <header class="page-header">
+            <h1>All Problem Requests</h1>
+            <a href="{{ request.url_for('problem_request') }}" class="btn primary-color-bg header-btn">
+                + New Problem Request
+            </a>
+        </header>
+        
+        {% if flash_msg %}
+            <div class="flash-message success-message">
+                <span>{{ flash_msg }}</span>
+            </div>
+        {% endif %}
+
+        <p class="welcome-message">Welcome, **{{ user[0] if user else 'Guest' }}**! Below is the list of submitted technical problems.</p>
+        
+        <section class="problems-list">
+            {% for problem in problems %}
+                <div class="problem-card">
+                    <div class="card-header">
+                        <h3 class="problem-title">Request #{{ problem.id }}: {{ problem.title }}</h3>
+                        <span class="status-tag status-{{ problem.status | lower | replace(' ', '-') }}">
+                            {{ problem.status }}
+                        </span>
+                    </div>
+                    
+                    <hr class="card-separator">
+                    
+                    <div class="problem-description">
+                        <h4>Description:</h4>
+                        <p>{{ problem.description }}</p>
+                    </div>
+
+                    <table class="problem-details-table">
+                        <tr>
+                            <th>Date Created:</th>
+                            <td>{{ problem.date_created.strftime('%Y-%m-%d %H:%M') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Created By:</th>
+                            <td>{{ problem.user.username if problem.user and problem.user.username else 'System' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Administrator:</th>
+                            <td>
+                                {% if problem.admin and problem.admin.username %}
+                                    <span class="admin-assigned">{{ problem.admin.username }}</span>
+                                {% else %}
+                                    <span class="admin-unassigned">Not assigned</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    {% if problem.image_url %}
+                        <div class="problem-image-preview">
+                            <p><strong>Added image:</strong></p>
+                            <img src="{{ url_for('static', path=problem.image_url) }}" alt="Problem Image" class="attached-image-thumbnail" style="width: 150px; height: 200px;">
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-actions">
+                        <a href="/problems/view?problem_id={{ problem.id }}" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+        
+        {% if not problems %}
+            <div class="no-problems">
+                <h2>No Problems Found</h2>
+                <p>There are currently no active requests. Feel free to submit a new one!</p>
+                <a href="{{ request.url_for('problem_request') }}" class="btn secondary-btn">Submit Problem</a>
+            </div>
+        {% endif %}
+
+    </main>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>TechService - Add answer</title>
+{% endblock %}
+
+{% block content %}
+    {%if flash_msg%}
+        <span>{{flash_msg}}</span>
+    {%endif%}
+
+    <form method="post" action="{{ request.url_for('add_answer')}}">
+        <input type="hidden" name="problem_id" value="{{id}}">
+        <textarea name="message" placeholder="Answer:"></textarea>
+        <button type="submit">Зберегти</button>
+    </form>
+    <h4>{{message}}</h4>
+{% endblock %}
