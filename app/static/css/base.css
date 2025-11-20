@@ -1,0 +1,226 @@
+/*
+ * Base CSS Style for FastAPI Website
+ * Optimized for readability and modern, clean design.
+ */
+
+:root {
+    /* Color Palette */
+    --primary-color: #38761D; /* Deep Green for accents/primary actions */
+    --secondary-color: #4A90E2; /* Blue for secondary actions/links */
+    --background-color: #F8F9FA; /* Light Grey/Off-White for background */
+    --surface-color: #FFFFFF; /* White for content containers */
+    --text-color: #333333; /* Dark Grey for main text */
+    --light-text-color: #666666; /* Lighter Grey for secondary text */
+    --border-color: #DDDDDD; /* Light border color */
+
+    /* Typography */
+    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-base: 16px;
+}
+
+/* --- Global Reset & Base Styles --- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding-top: 60px; /* Space for fixed navigation bar */
+}
+
+/* --- Typography --- */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2.0em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.2em; }
+h3 { font-size: 1.5em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* --- Navigation Bar (nav) --- */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    z-index: 1000;
+}
+
+nav a {
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: var(--primary-color);
+}
+
+nav a:hover {
+    background-color: var(--background-color);
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+/* --- Main Content Area --- */
+
+main, section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Add a class for main content wrapper, if needed later */
+.container {
+    padding: 20px;
+}
+
+/* --- Utility Classes --- */
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* --- Forms and Inputs (General Styling) --- */
+input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--light-text-color);
+}
+
+button, .btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+button:hover, .btn:hover {
+    background-color: #2F611A; /* Slightly darker green */
+}
+
+/* Error/Message Handling */
+.error-message {
+    color: #FF0000;
+    background-color: #FFDDDD;
+    border: 1px solid #FF0000;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+
+.flash-message {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid;
+}
+
+.success-message {
+    color: #1A5222; /* Darker green text */
+    background-color: #D4EDDA; /* Light green background */
+    border-color: #C3E6CB; /* Slightly darker light green border */
+}
+
+/* Auth Section Styling */
+.auth-section {
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+}
+
+.auth-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Secondary Button (for Sign Up) */
+.secondary-btn {
+    background-color: var(--secondary-color);
+}
+
+.secondary-btn:hover {
+    background-color: #3C7BB9; /* Darker blue */
+}
+
+/* Quick Access Section */
+.quick-access {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.primary-color-bg {
+    background-color: var(--primary-color);
+}
