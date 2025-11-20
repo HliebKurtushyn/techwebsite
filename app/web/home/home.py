@@ -7,6 +7,7 @@ from fastapi.security import OAuth2PasswordBearer
 
 from app.core.dependencies import *
 from app.core.config import ALGORITHM
+from app.core.dependencies import admin_required, clear_flash_cookie, get_current_user
 
 
 load_dotenv()
