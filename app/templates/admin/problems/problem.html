@@ -9,15 +9,44 @@
         <span>{{flash_msg}}</span>
     {%endif%}
 
+    <div>
+        <h3>Request #{{ problem.id }}: {{ problem.title }}</h3>
+        
+        <p><strong>Status:</strong> {{ problem.status }}</p>
+
+        <hr>
+        
+        <p><strong>Description:</strong></p>
+        <p>{{ problem.description }}</p>
+        
+        <p><strong>Date created:</strong> {{ problem.date_created.strftime('%Y-%m-%d %H:%M') }}</p>
+        
+        {% if problem.user %}
+            <p><strong>Created by user:</strong> {{ problem.user.username }}</p>
+        {% endif %}
+        
+        {% if problem.admin %}
+            <p><strong>Administrator:</strong> {{ problem.admin.username }}</p>
+        {% else %}
+            <p><strong>Administrator:</strong> Not assigned</p>
+        {% endif %}
+        
+        {% if problem.image_url %}
+            <div>
+                <p><strong>Added image:</strong></p>
+                <img src="{{ url_for('static', path=problem.image_url) }}" alt="Added image" style="width: 100px; height: 150px;">
+            </div>
+        {% endif %}
+        
+    </div>
     <form method="post">
-        <h4>{{problem.title}}</h4>
-        <input type="hidden" name="id" value="{{problem.id}}">
-        <p>{{problem.description}}</p>
-
-        {%if problem.image_url%}
-            <img src="{{ url_for('static', path=problem.image_url) }}" alt="Problem Image" style="max-width: 100px; max-height: 150px;">
-        {%endif%}
-
-        <button type="submit">Take to work</button>
+        <input type="hidden" name="problem_id" value="{{problem.id}}">
+        {% if problem.status != 'У роботі' %}
+            <button type="submit">Take to work</button>
+        {% else %}
+            <button type="submit" disabled="true">Already taken to work</button>
+        {% endif %}
     </form>
+    <hr>
+    <hr>    
 {% endblock %}
